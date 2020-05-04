@@ -1275,14 +1275,18 @@ func (feature Feature) SetFieldRaw(index int, field Field) {
 }
 
 // Set field as binary data
-func (feature Feature) SetFieldBinary(index int, value []uint8) {
-	C.OGR_F_SetFieldBinary(
-		feature.cval,
-		C.int(index),
-		C.int(len(value)),
-		(unsafe.Pointer(&value[0])),
-	)
-}
+//
+// ** CDB: We aren't using this, and the final parameter changed between GDAL 2 -> GDAL 3, meaning that
+//         if we include it, it force us to use one version or the other.
+//
+// func (feature Feature) SetFieldBinary(index int, value []uint8) {
+// 	C.OGR_F_SetFieldBinary(
+// 		feature.cval,
+// 		C.int(index),
+// 		C.int(len(value)),
+// 		(unsafe.Pointer(&value[0])),
+// 	)
+// }
 
 // Set field as date / time
 func (feature Feature) SetFieldDateTime(index int, dt time.Time) {
